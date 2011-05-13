@@ -10,11 +10,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110315184642) do
+ActiveRecord::Schema.define(:version => 20110513130439) do
 
   create_table "presences", :force => true do |t|
     t.integer  "room_id"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "request_informations", :force => true do |t|
+    t.string   "request_id"
+    t.string   "opentok_id"
+    t.boolean  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

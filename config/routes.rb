@@ -7,6 +7,7 @@ Sutalk::Application.routes.draw do
   # get "pages/invite"
   
   post "pages/newfriends"
+  post "pages/addrequestsinfo"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

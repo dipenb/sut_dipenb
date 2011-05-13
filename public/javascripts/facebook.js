@@ -52,11 +52,17 @@ function requestInvite( onlineFriends ){
 	
 	FB.ui({	method: 'apprequests', 
 					message: message,
-					title: 'Select Online Friends To SUtalk Video Chat', 
+					title: 'Select Online Friends To SUtalk Video Chat',
 					filters: [{name: 'Online Friends', user_ids: onlineFriendsArray}, 'all' ]
 				},
 				function(response) {
-						feedInvite();	
+						feedInvite();
+          if (response && response.request_ids) {
+            var requests = response.request_ids.join(',');
+            $.post('/pages/addrequestsinfo',{request_ids: requests, sid: opentok.session_id},function(resp) {
+            });
+          }
+
 				}
 	);
 }
@@ -82,7 +88,7 @@ feedInvite = function feedInvite(){
 	 							fb_api.canvas_page + '?sid=' + opentok.session_id
 	   },
 		 function(response) {
-				setCanvasHeight(CANVAS_HEIGHT_LARGE);	
+				setCanvasHeight(CANVAS_HEIGHT_LARGE);
 		 }
 	 );
 }
@@ -105,6 +111,12 @@ function inviteSingle(id){
 				},
 				function(response) {
 					setCanvasHeight(CANVAS_HEIGHT_LARGE);
+          if (response && response.request_ids) {
+            var requests = response.request_ids.join(',');
+            $.post('/pages/addrequestsinfo',{request_ids: requests, sid: opentok.session_id},function(resp) {
+            });
+          }
+					
 				}
 	);
 }
